@@ -1,7 +1,7 @@
 # Author: Dianna Pham
 # GitHub username: dianna-SE
-# Date: 5/22/2023
-# Description: Create a program that mimics the Othello game (text-based Othello) using
+# Date: 6/21/2023
+# Description: Create a program that mimics the Reversi game (text-based Reversi) using
 #               several classes and several methods to recreate two players playing the game.
 import sys
 import pygame
@@ -153,7 +153,7 @@ class Reversi:
         intro_start_button_rect = pygame.Rect(self.window_width // 2 - 25, self.window_height // 2 + 100, 50, 50)
         pygame.draw.rect(self.window, self.button_color, intro_start_button_rect, border_radius=16)
 
-        intro_start_button_image = pygame.image.load("right-arrow.png")
+        intro_start_button_image = pygame.image.load("images/right-arrow.png")
         intro_start_button_image = pygame.transform.scale(intro_start_button_image, (30, 30))
 
         intro_start_button_x = intro_start_button_rect.x + intro_start_button_rect.width // 2 - intro_start_button_image.get_width() // 2
@@ -175,14 +175,14 @@ class Reversi:
         # Draw the help button
         grid_help_button_rect = pygame.Rect(self.window_width // 2 - 25, self.window_height // 2 + 250, 40, 40)
         pygame.draw.rect(self.window, self.button_color, grid_help_button_rect, border_radius=16)
-        grid_help_button_image = pygame.image.load("help.png")
+        grid_help_button_image = pygame.image.load("images/help.png")
         grid_help_button_image = pygame.transform.scale(grid_help_button_image, (20, 20))
         grid_help_button_x = grid_help_button_rect.x + grid_help_button_rect.width // 2 - grid_help_button_image.get_width() // 2
         grid_help_button_y = grid_help_button_rect.y + grid_help_button_rect.height // 2 - grid_help_button_image.get_height() // 2
         self.window.blit(grid_help_button_image, (grid_help_button_x, grid_help_button_y))
 
         # Text
-        metropolis_font = "Metropolis-Medium.otf"  # Replace with the actual path to your font file
+        metropolis_font = "fonts/Metropolis-Medium.otf"  # Replace with the actual path to your font file
         font = pygame.font.Font(metropolis_font, 25)  # Customize the font and size
 
         # Draw the player's turns (TOP IMAGE)
@@ -395,7 +395,7 @@ class Reversi:
         # Draw the back button
         grid_back_button_rect = pygame.Rect(25, 25, 40, 40)
         pygame.draw.rect(self.window, self.button_color, grid_back_button_rect, border_radius=16)
-        grid_back_button_image = pygame.image.load("left-arrow.png")
+        grid_back_button_image = pygame.image.load("images/left-arrow.png")
         grid_back_button_image = pygame.transform.scale(grid_back_button_image, (20, 20))
         grid_back_button_x = grid_back_button_rect.x + grid_back_button_rect.width // 2 - grid_back_button_image.get_width() // 2
         grid_back_button_y = grid_back_button_rect.y + grid_back_button_rect.height // 2 - grid_back_button_image.get_height() // 2
@@ -411,7 +411,7 @@ class Reversi:
         mouse_pos = pygame.mouse.get_pos()
         self.count_grid()
 
-        metropolis_font = "Metropolis-Medium.otf"  # Replace with the actual path to your font file
+        metropolis_font = "fonts/Metropolis-Medium.otf"  # Replace with the actual path to your font file
         font = pygame.font.Font(metropolis_font, 25)  # Customize the font and size
 
         # handle player1
