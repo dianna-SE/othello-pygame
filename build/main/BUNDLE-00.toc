@@ -1,0 +1,3 @@
+([('main',
+   '/Users/dianna/PycharmProjects/othello_pygame/dist/main',
+   'EXECUTABLE')],)
