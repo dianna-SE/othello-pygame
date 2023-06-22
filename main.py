@@ -163,122 +163,10 @@ class Reversi:
 
         pygame.display.flip()
 
-    def switch_players(self, player):
-        """
-        Represents a method that simply updates player turns.
-
-        Returns -- nothing, but sets certain flags to handle cell clicks.
-        """
-        if player.get_player() == "purple":
-            self.current_player = self.player2
-
-        elif player.get_player() == "rose":
-            self.current_player = self.player1
-
-        self.clicked_cell = None
-        self.cell_clicked = False
-        self.grid_updated = False
-
-    def display_board(self):
-        """
-        Represents a method that takes no parameters and displays the
-        current progress of the board and boundaries. It returns the layout of
-        the board for the Reversi game to be played. Cells are centered based
-        on the window layout of pygame.
-        """
-        # Calculate the total grid size with padding
-        total_grid_size = self.grid_size * (2 * self.radius + self.cell_padding) - self.cell_padding
-        total_size = total_grid_size + 2 * self.outer_padding
-        start_x = (self.window_width - total_size) // 2
-        start_y = (self.window_height - total_size) // 2
-
-        # Draw the padding around the grid with rounded corners
-        pygame.draw.rect(self.window, self.beige, (start_x, start_y, total_size, total_size), border_radius=self.corner_radius)
-
-        # Initialize the starting pieces of the board based on self._board
-        for row in range(len(self._board)):
-            for col in range(len(self._board[row])):
-                cell_value = self._board[row][col]
-                # Calculate the center point of each grid cell
-                center_x = start_x + self.outer_padding + self.radius + col * (2 * self.radius + self.cell_padding)
-                center_y = start_y + self.outer_padding + self.radius + row * (2 * self.radius + self.cell_padding)
-
-                # Create a rectangle around the grid cell
-                self.cell_rect = pygame.Rect(
-                    center_x - self.radius,
-                    center_y - self.radius,
-                    2 * self.radius,
-                    2 * self.radius
-                )
-                self.cells.append(self.cell_rect)
-
-                # Update the game board state based on cell interactions
-                self.handle_cell_interactions(row, col, self.cell_rect)
-
-                if cell_value == 'O':
-                    pygame.draw.circle(self.window, self.rose, (center_x, center_y), self.radius)
-                elif cell_value == 'X':
-                    pygame.draw.circle(self.window, self.purple, (center_x, center_y), self.radius)
-
-                # !!! ADDING THESE WILL DISABLE THE HOVER COLOR FOR PLAYER1 AND PLAYER2 !!!! #
-                elif cell_value == '.':
-                    pygame.draw.circle(self.window, self.grid_color, (center_x, center_y), self.radius)
-                else:
-                    pygame.draw.circle(self.window, self.beige, (center_x, center_y), self.radius)
-
-                    # this kind works but is lowkey brute force
-                    if self.cell_rect.collidepoint(pygame.mouse.get_pos()):
-                        pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_ARROW)
-
-    def play_game(self):
-        """Represents a method that plays the game and calls several methods to assist in it."""
-        self.display_board()
-        self.return_available_positions(self.current_player)
-
-        if self.grid_updated:
-            self.switch_players(self.current_player)
-
-    def return_winner(self):
-        """
-        Represents a method that takes no parameters and returns the
-        results that includes the winner’s name, the winner’s piece count and the
-        opposing piece count. The results are tallied by a count (variables white
-        and black) that increments by one every time a specified color piece is
-        identified in the board.
-
-        True – white or black count is greater than the other
-        False – neither white nor black count is greater, it is equal
-        Returns – "Winner is white/black" or "It's a tie"
-        """
-        # get the sum of black and white counts
-        purple = 0
-        rose = 0
-
-        # traverse through each row
-        for row in self._board:
-
-            # traverse through each index in row
-            for column in row:
-                if column == "X":
-                    purple += 1
-
-                if column == "O":
-                    rose += 1
-
-        if purple > rose:
-            self.message = "Game ended. Player 1 wins!"
-            print("Winner is player 1")
-
-        elif rose > purple:
-            self.message = "Game ended. Player 2 wins!"
-            print("Winner is player 2")
-
-        else:
-            self.message = "Game ended. It's a tie!"
-            print("It's a tie")
-
     def draw_grid(self):
-        """Represents a method that draws initializes state of the entire board."""
+        """
+        Represents a method that draws initializes state of the entire board.
+        """
         self.window.fill(self.background_color)
 
         # Draw the back button
@@ -382,6 +270,123 @@ class Reversi:
 
         pygame.display.flip()
 
+    def draw_help(self):
+        """
+        Represents a method......
+        """
+        self.window.fill(self.background_color)
+        self.back_button()
+
+    def switch_players(self, player):
+        """
+        Represents a method that simply updates player turns.
+
+        Returns -- nothing, but sets certain flags to handle cell clicks.
+        """
+        if player.get_player() == "purple":
+            self.current_player = self.player2
+
+        elif player.get_player() == "rose":
+            self.current_player = self.player1
+
+        self.clicked_cell = None
+        self.cell_clicked = False
+        self.grid_updated = False
+
+    def display_board(self):
+        """
+        Represents a method that takes no parameters and displays the
+        current progress of the board and boundaries. It returns the layout of
+        the board for the Reversi game to be played. Cells are centered based
+        on the window layout of pygame.
+        """
+        # Calculate the total grid size with padding
+        total_grid_size = self.grid_size * (2 * self.radius + self.cell_padding) - self.cell_padding
+        total_size = total_grid_size + 2 * self.outer_padding
+        start_x = (self.window_width - total_size) // 2
+        start_y = (self.window_height - total_size) // 2
+
+        # Draw the padding around the grid with rounded corners
+        pygame.draw.rect(self.window, self.beige, (start_x, start_y, total_size, total_size), border_radius=self.corner_radius)
+
+        # Initialize the starting pieces of the board based on self._board
+        for row in range(len(self._board)):
+            for col in range(len(self._board[row])):
+                cell_value = self._board[row][col]
+                # Calculate the center point of each grid cell
+                center_x = start_x + self.outer_padding + self.radius + col * (2 * self.radius + self.cell_padding)
+                center_y = start_y + self.outer_padding + self.radius + row * (2 * self.radius + self.cell_padding)
+
+                # Create a rectangle around the grid cell
+                self.cell_rect = pygame.Rect(
+                    center_x - self.radius,
+                    center_y - self.radius,
+                    2 * self.radius,
+                    2 * self.radius
+                )
+                self.cells.append(self.cell_rect)
+
+                # Update the game board state based on cell interactions
+                self.handle_cell_interactions(row, col, self.cell_rect)
+
+                if cell_value == 'O':
+                    pygame.draw.circle(self.window, self.rose, (center_x, center_y), self.radius)
+                elif cell_value == 'X':
+                    pygame.draw.circle(self.window, self.purple, (center_x, center_y), self.radius)
+
+                # !!! ADDING THESE WILL DISABLE THE HOVER COLOR FOR PLAYER1 AND PLAYER2 !!!! #
+                elif cell_value == '.':
+                    pygame.draw.circle(self.window, self.grid_color, (center_x, center_y), self.radius)
+                else:
+                    pygame.draw.circle(self.window, self.beige, (center_x, center_y), self.radius)
+
+                    # this kind works but is lowkey brute force
+                    if self.cell_rect.collidepoint(pygame.mouse.get_pos()):
+                        pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_ARROW)
+
+    def play_game(self):
+        """Represents a method that plays the game and calls several methods to assist in it."""
+        self.display_board()
+        self.return_available_positions(self.current_player)
+
+        if self.grid_updated:
+            self.switch_players(self.current_player)
+
+    def return_winner(self):
+        """
+        Represents a method that takes no parameters and returns the
+        results that includes the winner’s name, the winner’s piece count and the
+        opposing piece count. The results are tallied by a count (variables purple
+        and rose) that increments by one every time a specified color piece is
+        identified in the board.
+        """
+        # get the sum of purple and rose counts
+        purple = 0
+        rose = 0
+
+        # traverse through each row
+        for row in self._board:
+
+            # traverse through each index in row
+            for column in row:
+                if column == "X":
+                    purple += 1
+
+                if column == "O":
+                    rose += 1
+
+        if purple > rose:
+            self.message = "Game ended. Player 1 wins!"
+            print("Winner is player 1")
+
+        elif rose > purple:
+            self.message = "Game ended. Player 2 wins!"
+            print("Winner is player 2")
+
+        else:
+            self.message = "Game ended. It's a tie!"
+            print("It's a tie")
+
     def back_button(self):
         """
         Represents the back button of a page.
@@ -452,6 +457,9 @@ class Reversi:
             pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_HAND)
 
     def check_boundaries(self, player, check_position):
+        """
+        Represents......
+        """
         row, col = check_position
         this_move = self._board[row][col]
 
@@ -480,9 +488,13 @@ class Reversi:
 
     def return_available_positions(self, player):
         """
-        ### AVAILABLE POSITIONS ###
-        :param player:
-        :return:
+        Represents a method that takes in one parameter, the player’s color
+        piece and calculates the available spots for a player to travel to for a
+        capturing move based on which player it is.
+
+        An additional recursive method called “rec_validate_move” takes in four
+        parameters, the row, column, and x and y directions to validate possible
+        moves to capture within the board’s boundaries.
         """
 
         available_positions = []
@@ -506,7 +518,9 @@ class Reversi:
 
         # iterate through the player's positions to calculate available capturing moves
         def rec_validate_move(this_row, this_column, move_x, move_y):
-
+            """
+            Represents a recursive function......
+            """
             # increment move directions to current position
             x, y = this_row + move_x, this_column + move_y
 
@@ -616,6 +630,7 @@ class Reversi:
             self.player2_positions = True
 
         sort_positions = sorted(available_positions)
+
         return sort_positions
 
     def flip_piece(self, color, piece_position):
@@ -623,11 +638,6 @@ class Reversi:
         Represents a method that takes in the position of the player piece
         and will flip the piece at neighboring positions to the player piece and
         updates the progress of the board.
-
-        True – If player is specified player and position of capture is in
-        bounds to flip the piece
-        False – Captured position is out of bounds
-        Returns – Nothing, just a return.
         """
         row, column = piece_position
 
@@ -671,8 +681,6 @@ class Reversi:
 
         The piece at that position for that color is placed and the board
         is updated to the current status. Pieces are also flipped accordingly.
-
-        Returns – The current status of board.
         """
         row, col = piece_position
 
@@ -691,6 +699,9 @@ class Reversi:
         return row, col
 
     def count_grid(self):
+        """
+        Represents a method.......
+        """
         # Initialize counts
         self.player1_count = 0
         self.player2_count = 0
@@ -702,13 +713,6 @@ class Reversi:
 
                 if column == "O":
                     self.player2_count += 1
-
-    def draw_help(self):
-        """
-        Represents a method that blah blah blah
-        """
-        self.window.fill(self.background_color)
-        self.back_button()
 
     def run(self):
         """
