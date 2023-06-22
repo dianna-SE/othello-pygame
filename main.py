@@ -5,23 +5,63 @@
 #               several classes and several methods to recreate two players playing the game.
 import sys
 import pygame
-import time
 
 
 class Player:
+    """
+    Represents a Player class that is an implementation of the player name
+    and the player’s color piece. This class will be used in coordination with the
+    Reversi class.
+    """
+
     def __init__(self, player, color):
+        """
+        Represents an init method or a constructor that initializes private data members
+        player name and the color of the pieces. The player’s name along with the player’s
+        color piece are initialized as private data members.
+        """
         self._player = player
         self._color = color
 
     def get_player(self):
+        """
+        Represents a get method that takes no parameters and is used in
+        conjunction with the Othello class to retrieve the current player name.
+
+        Returns – current value of the player name
+        """
         return self._player
 
     def get_color(self):
+        """
+        Represents a get method that takes no parameters and is used in
+        conjunction with the Othello class to retrieve the current player color
+        piece.
+
+        Returns – current value of the color
+        """
         return self._color
 
 
 class Reversi:
+    """
+    Represents the Reversi class that is an implementation of the Reversi game
+    that will track the progress of the game being played.
+
+    Moves will be validated on whether it can capture the opposing player’s piece, and
+    any move that can be made is considered part of the available positions.
+
+    The game ends when no capturing move can be made on the board and the winner is
+    the player that has the most pieces on the board.
+    """
     def __init__(self):
+        """
+        Represents an init method or a constructor that takes no parameters
+        and initializes all assets for a functional Reversi game. 
+
+        This includes the pygame window, buttons, grid, colors, state of players,
+        flags, and player counts.
+        """
         pygame.init()
 
         self.window_width = 900
@@ -39,11 +79,7 @@ class Reversi:
         self.rose = (255, 217, 228)  # ebd3cb
         self.grid_color = (245, 231, 221)  # Color of the grid cells
         self.background_color = (245, 231, 221)  # Background color
-        self.padding_color = (255, 246, 239)  # Color of the grid padding
         self.button_color = self.purple  # Color of the buttons
-        self.button_text_color = self.beige  # Color of the button text
-        self.beige_circle = (255, 246, 239)
-        self.purple_circle = (216, 219, 255)
 
         # Grid dimensions
         self.grid_size = 10
@@ -67,8 +103,6 @@ class Reversi:
         self.player1 = Player("purple", "purple")  # X
         self.player2 = Player("rose", "rose")  # O
         self.current_player = self.player1
-        self.player1_pieces = []
-        self.player2_pieces = []
         self.player1_positions = True
         self.player2_positions = True
         self.player1_count = 0
@@ -77,7 +111,6 @@ class Reversi:
 
         # Initialize the board
         self._board = []
-        self._player_list = []
         self.check_both_player_positions = 0
 
         for row in range(10):
@@ -104,6 +137,10 @@ class Reversi:
         pygame.display.set_caption("o t h e l l o")
 
     def draw_intro(self):
+        """
+        Represents.....
+        """
+
         self.window.fill(self.grid_color)
 
         # Draw intro-specific elements here, including the circles and button
@@ -127,7 +164,11 @@ class Reversi:
         pygame.display.flip()
 
     def switch_players(self, player):
-        """Represents a method that updates the cell when clicked."""
+        """
+        Represents a method that simply updates player turns.
+
+        Returns -- nothing, but sets certain flags to handle cell clicks.
+        """
         if player.get_player() == "purple":
             self.current_player = self.player2
 
@@ -140,8 +181,10 @@ class Reversi:
 
     def display_board(self):
         """
-        Represents a method that initializes the state of the board.
-        :return:
+        Represents a method that takes no parameters and displays the
+        current progress of the board and boundaries. It returns the layout of
+        the board for the Reversi game to be played. Cells are centered based
+        on the window layout of pygame.
         """
         # Calculate the total grid size with padding
         total_grid_size = self.grid_size * (2 * self.radius + self.cell_padding) - self.cell_padding
@@ -186,28 +229,6 @@ class Reversi:
                     # this kind works but is lowkey brute force
                     if self.cell_rect.collidepoint(pygame.mouse.get_pos()):
                         pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_ARROW)
-
-    def check_all_positions(self):
-        """
-        Represents blahblahblah
-        :return:
-        """
-        if self.current_player.get_color() == "purple":
-            curr_player = self.player1
-            opponent = self.player2
-        else:
-            curr_player = self.player2
-            opponent = self.player1
-
-        # get available positions for both players to check if game has ended
-        opponent_positions = self.return_available_positions(opponent)
-        player_positions = self.return_available_positions(curr_player)
-
-        if player_positions == [] and opponent_positions == []:
-            self.check_both_player_positions = True
-            return True
-
-        return False
 
     def play_game(self):
         """Represents a method that plays the game and calls several methods to assist in it."""
@@ -273,8 +294,8 @@ class Reversi:
         self.window.blit(grid_help_button_image, (grid_help_button_x, grid_help_button_y))
 
         # Text
-        coco_gothic = "Metropolis-Medium.otf"  # Replace with the actual path to your font file
-        font = pygame.font.Font(coco_gothic, 25)  # Customize the font and size
+        metropolis_font = "Metropolis-Medium.otf"  # Replace with the actual path to your font file
+        font = pygame.font.Font(metropolis_font, 25)  # Customize the font and size
 
         # Draw the player's turns (TOP IMAGE)
         if self.current_player == self.player1:
@@ -300,7 +321,7 @@ class Reversi:
         self.play_game()
 
         # Draw message box and text (bottom)
-        font = pygame.font.Font(coco_gothic, 19)
+        font = pygame.font.Font(metropolis_font, 19)
         text_surface = font.render(self.message, True, (160, 160, 160))  # Customize the text and color
         text_rect = text_surface.get_rect()
         text_rect.center = ((self.window_width - 500) // 2 + 250, self.window_height - 110)
@@ -315,7 +336,7 @@ class Reversi:
         box_y = (self.window_height - box_height) // 2
 
         # player 1 label
-        font = pygame.font.Font(coco_gothic, 15)
+        font = pygame.font.Font(metropolis_font, 15)
         text_surface = font.render("player 1", True, (255, 255, 255))
         text_rect = text_surface.get_rect()
         text_rect.center = (box_x + 40, box_y + 49)
@@ -324,7 +345,7 @@ class Reversi:
         self.window.blit(text_surface, text_rect)
 
         # player 2 label
-        font = pygame.font.Font(coco_gothic, 15)
+        font = pygame.font.Font(metropolis_font, 15)
         text_surface = font.render("player 2", True, (255, 255, 255))
         text_rect = text_surface.get_rect()
         text_rect.center = (box_x + 40, box_y + 81)
@@ -333,7 +354,7 @@ class Reversi:
         self.window.blit(text_surface, text_rect)
 
         # available positions label
-        font = pygame.font.Font(coco_gothic, 15)
+        font = pygame.font.Font(metropolis_font, 15)
         text_surface = font.render("moves", True, (255, 255, 255))
         text_rect = text_surface.get_rect()
         text_rect.center = (box_x + 36, box_y + 111)
@@ -342,7 +363,7 @@ class Reversi:
         self.window.blit(text_surface, text_rect)
 
         # player 1 COUNT
-        font = pygame.font.Font(coco_gothic, 15)
+        font = pygame.font.Font(metropolis_font, 15)
         text_surface = font.render(str(self.player1_count), True, (160, 160, 160))
         text_rect = text_surface.get_rect()
         text_rect.center = (box_x - 660, box_y + 80)
@@ -351,7 +372,7 @@ class Reversi:
         self.window.blit(text_surface, text_rect)
 
         # player 2 COUNT
-        font = pygame.font.Font(coco_gothic, 15)
+        font = pygame.font.Font(metropolis_font, 15)
         text_surface = font.render(str(self.player2_count), True, (160, 160, 160))
         text_rect = text_surface.get_rect()
         text_rect.center = (box_x - 620, box_y + 80)
@@ -385,8 +406,8 @@ class Reversi:
         mouse_pos = pygame.mouse.get_pos()
         self.count_grid()
 
-        coco_gothic = "Metropolis-Medium.otf"  # Replace with the actual path to your font file
-        font = pygame.font.Font(coco_gothic, 25)  # Customize the font and size
+        metropolis_font = "Metropolis-Medium.otf"  # Replace with the actual path to your font file
+        font = pygame.font.Font(metropolis_font, 25)  # Customize the font and size
 
         # handle player1
         if self.cell_clicked and cell_rect.collidepoint(mouse_pos) and self.current_player == self.player1:
@@ -563,6 +584,7 @@ class Reversi:
         total_size = total_grid_size + 2 * self.outer_padding
         start_x = (self.window_width - total_size) // 2
         start_y = (self.window_height - total_size) // 2
+
         # Initialize the starting pieces of the board based on self._board
         for row in range(len(self._board)):
             for col in range(len(self._board[row])):
@@ -640,15 +662,7 @@ class Reversi:
                 # flip the captured pieces
                 for flip_piece in flip_pieces:
                     flip_row, flip_column = flip_piece
-                    # Flip the color of the pieces
                     self._board[flip_row][flip_column] = player
-
-                    # Draw the flipped pieces on the grid
-                    # center_x = self.cell_size * flip_column + self.cell_size // 2
-                    # center_y = self.cell_size * flip_row + self.cell_size // 2
-                    # # pygame.draw.circle(self.window, player_color, (center_x, center_y), self.radius)
-
-                    # WHY DID THIS CODE WORK?????
                     pygame.draw.circle(self.window, player_color, self.cell_rect.center, self.radius)
 
     def make_move(self, color, piece_position):
@@ -677,7 +691,6 @@ class Reversi:
         return row, col
 
     def count_grid(self):
-        # Outside the draw_grid() function, where it is called in the Pygame loop:
         # Initialize counts
         self.player1_count = 0
         self.player2_count = 0
