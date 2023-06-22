@@ -128,14 +128,12 @@ class Reversi:
 
     def switch_players(self, player):
         """Represents a method that updates the cell when clicked."""
-        print("current player:", self.current_player.get_color())
         if player.get_player() == "purple":
             self.current_player = self.player2
 
         elif player.get_player() == "rose":
             self.current_player = self.player1
 
-        print("switching to player:", self.current_player.get_color())
         self.clicked_cell = None
         self.cell_clicked = False
         self.grid_updated = False
