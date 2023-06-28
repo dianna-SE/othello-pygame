@@ -31,14 +31,24 @@ These items must be installed in order for the program to work:
 
 ## Built With
 
-* [Python](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [PyCharm](https://maven.apache.org/) - Dependency Management
-* [GitHub](https://maven.apache.org/) - Version Control Management
+* [Python](https://www.python.org/) - Language used
+* [PyCharm](https://www.jetbrains.com/pycharm/) - IDE
+* [GitHub](https://github.com/) - Version Control Management
 
 
 ## Contributing
 
-Designed and programmed by Dianna
+Designed and programmed by Dianna.
+
+### GitHub:
+```
+https://github.com/dianna-SE
+```
+
+### LinkedIn:
+```
+https://www.linkedin.com/in/diannapham-se/
+```
 
 ## Authors
 
