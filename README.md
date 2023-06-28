@@ -1,10 +1,20 @@
 # Othello
 
-The program is a final project from coursework CS 162 - Intro to CS II at Oregon State University. I successfully developed and implemented Othello using Python (programming language) and PyCharm (IDE) through this final project, showcasing my proficiency in computer science concepts. Utilizing Object-Oriented Programming (OOP) principles and data structures, I organized the game components to ensure efficient data management and scalability, resulting in enhanced dynamic gameplay mechanics. To further elevate the project, I transformed it into a visual application using PyCharm. By incorporating code modifications, I successfully implemented a player-based turn system, significantly improving the project's functionality and providing an elevated user experience.
+The program is a final project from coursework CS 162 - Intro to CS II at Oregon State University. I successfully developed and implemented Othello using Python (programming language) and PyCharm (IDE) through this final project, showcasing my proficiency in computer science concepts. 
+
+Utilizing Object-Oriented Programming (OOP) principles and data structures, I organized the game components to ensure efficient data management and scalability, resulting in enhanced dynamic gameplay mechanics. 
+
+To further elevate the project, I transformed it into a visual application using PyCharm. By incorporating code modifications, I successfully implemented a player-based turn system, significantly improving the project's functionality and providing an elevated user experience.
 
 ## Project Overview
+Several key points for this project:
+```
+This program is designed to mimic the classic Reversi game in a visual format, utilizing multiple classes and methods to recreate the gameplay between two players. 
 
-This program is designed to mimic the classic Reversi game in a visual format, utilizing multiple classes and methods to recreate the gameplay between two players. The implementation involves structuring the game logic and mechanics using object-oriented programming principles, with each player taking turns to strategically place their pieces on the game board. The program utilizes various methods within the classes to handle moves, validate input, check for valid moves, update the board, and determine the winner. 
+The implementation involves structuring the game logic and mechanics using object-oriented programming principles, with each player taking turns to strategically place their pieces on the game board. 
+
+The program also utilizes various methods within the classes to handle moves, validate input, check for valid moves, update the board, and determine the winner. 
+```
 
 ### Gameplay
 
