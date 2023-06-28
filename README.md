@@ -1,6 +1,6 @@
 # Othello
 
-The program is a final project from coursework CS 162 - Intro to CS II at Oregon State University. I successfully developed and implemented Othello through this final project, showcasing my proficiency in computer science concepts. Utilizing Object-Oriented Programming (OOP) principles and data structures, I organized the game components to ensure efficient data management and scalability, resulting in enhanced dynamic gameplay mechanics. To further elevate the project, I transformed it into a visual application using PyCharm. By incorporating code modifications, I successfully implemented a player-based turn system, significantly improving the project's functionality and providing an elevated user experience.
+The program is a final project from coursework CS 162 - Intro to CS II at Oregon State University. I successfully developed and implemented Othello using Python (programming language) and PyCharm (IDE) through this final project, showcasing my proficiency in computer science concepts. Utilizing Object-Oriented Programming (OOP) principles and data structures, I organized the game components to ensure efficient data management and scalability, resulting in enhanced dynamic gameplay mechanics. To further elevate the project, I transformed it into a visual application using PyCharm. By incorporating code modifications, I successfully implemented a player-based turn system, significantly improving the project's functionality and providing an elevated user experience.
 
 ## Project Overview
 
